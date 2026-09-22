@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASTO-EXPERT | Quimper</title>
+    <!-- Tailwind CSS pour le design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        castoblue: '#004C97',
+                        castoyellow: '#FFD100'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .danger-tag { background-color: #fee2e2; border-left: 4px solid #ef4444; padding: 10px; margin: 10px 0; font-weight: bold; color: #b91c1c; }
+        .warning-tag { background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 10px; margin: 10px 0; font-weight: bold; color: #b45309; }
+    </style>
+</head>
+<body class="bg-gray-50 flex flex-col h-screen font-sans">
+
+    <!-- En-tête Castorama -->
+    <header class="bg-castoblue text-white p-4 shadow-md flex justify-between items-center shrink-0">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-tools text-castoyellow text-2xl"></i>
+            <h1 class="text-xl font-bold tracking-wider">CASTO-EXPERT <span class="text-sm font-normal opacity-80">- Quimper</span></h1>
+        </div>
+        <div class="text-xs flex items-center gap-2">
+            <input type="password" id="apiKeyInput" placeholder="Clé API Gemini..." class="text-black px-2 py-1 rounded text-xs w-32 border-none focus:ring-2 focus:ring-castoyellow">
+        </div>
+    </header>
+
+    <!-- Navigation des onglets -->
+    <nav class="bg-white border-b flex shrink-0 shadow-sm">
+        <button id="tab-chat" class="flex-1 py-3 font-bold text-castoblue border-b-4 border-castoyellow transition-colors" onclick="switchTab('chat')">
+            <i class="fa-solid fa-robot mr-2"></i>Assistant IA
+        </button>
+        <button id="tab-calc" class="flex-1 py-3 font-bold text-gray-500 border-b-4 border-transparent hover:text-castoblue transition-colors" onclick="switchTab('calc')">
+            <i class="fa-solid fa-calculator mr-2"></i>Calculatrices
+        </button>
+    </nav>
+
+    <!-- ZONE DE CHAT -->
+    <main id="content-chat" class="tab-content active flex-1 flex flex-col overflow-hidden">
+        <div id="chat-history" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-100">
+            <!-- Message de bienvenue -->
+            <div class="flex gap-3">
+                <div class="bg-castoblue text-white p-2 rounded-full h-10 w-10 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="bg-white border shadow-sm rounded-lg p-3 max-w-[85%]">
+                    <p class="text-sm">Bonjour ! Je suis Casto-Expert. Paramétrage de sécurité activé (Créativité : 0%). Base de données de Quimper chargée. Comment puis-je t'aider en rayon aujourd'hui ?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-4 border-t shrink-0">
+            <!-- Boutons rapides -->
+            <div class="flex gap-2 mb-3 overflow-x-auto pb-2">
+                <button onclick="sendQuickPrompt('Humidité mur salle de bain')" class="whitespace-nowrap bg-gray-100 hover:bg-gray-200 text-xs text-gray-700 px-3 py-1 rounded-full border">💧 Humidité mur</button>
+                <button onclick="sendQuickPrompt('Peindre sur du carrelage')" class="whitespace-nowrap bg-gray-100 hover:bg-gray-200 text-xs text-gray-700 px-3 py-1 rounded-full border">🎨 Peinture/Carrelage</button>
+                <button onclick="sendQuickPrompt('Sous-couche parquet stratifié')" class="whitespace-nowrap bg-gray-100 hover:bg-gray-200 text-xs text-gray-700 px-3 py-1 rounded-full border">🪵 Sous-couche stratifié</button>
+            </div>
+            
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-castoblue" placeholder="Décris la situation du client...">
+                <button onclick="sendMessage()" class="bg-castoyellow text-castoblue font-bold px-6 py-2 rounded-lg hover:bg-yellow-400 transition-colors shadow-sm">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- ZONE CALCULATRICES -->
+    <main id="content-calc" class="tab-content flex-1 overflow-y-auto p-4 bg-gray-50">
+        <div class="max-w-md mx-auto space-y-6">
+            
+            <!-- Surface -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                <h2 class="font-bold text-castoblue mb-4"><i class="fa-solid fa-vector-square mr-2"></i>1. Calcul de Surface</h2>
+                <div class="flex gap-4 mb-3">
+                    <div class="flex-1">
+                        <label class="text-xs text-gray-500">Longueur (m)</label>
+                        <input type="number" id="calc-long" class="w-full border rounded p-2 mt-1" oninput="calculerSurface()">
+                    </div>
+                    <div class="flex-1">
+                        <label class="text-xs text-gray-500">Largeur (m)</label>
+                        <input type="number" id="calc-larg" class="w-full border rounded p-2 mt-1" oninput="calculerSurface()">
+                    </div>
+                </div>
+                <div class="bg-gray-50 p-3 rounded border text-center font-bold text-lg text-castoblue">
+                    <span id="resultat-surface">0</span> m²
+                </div>
+            </div>
+
+            <!-- Carrelage -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                <h2 class="font-bold text-castoblue mb-4"><i class="fa-solid fa-chess-board mr-2"></i>2. Carrelage & Sols</h2>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-500">Surface à couvrir (m²)</label>
+                    <input type="number" id="calc-surf-carr" class="w-full border rounded p-2 mt-1" oninput="calculerCarrelage()">
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-500">Contenu d'un carton (m²)</label>
+                    <input type="number" id="calc-carton" class="w-full border rounded p-2 mt-1" value="1.5" step="0.1" oninput="calculerCarrelage()">
+                </div>
+                <div class="bg-blue-50 p-4 rounded border border-blue-100 text-sm space-y-2 text-gray-700">
+                    <p class="font-bold text-castoblue border-b pb-1">Besoins (incluant marge 10%) :</p>
+                    <p>Surface avec coupes : <span id="res-surf-totale" class="font-bold">0</span> m²</p>
+                    <p>Nombre de cartons : <span id="res-cartons" class="font-bold text-lg text-castoblue">0</span></p>
+                    <p class="text-xs text-gray-500 italic mt-2 border-t pt-2">Ventes complémentaires (estimations) :</p>
+                    <p>Colle nécessaire : ~<span id="res-colle" class="font-bold">0</span> kg (base 5kg/m²)</p>
+                    <p>Joint nécessaire : ~<span id="res-joint" class="font-bold">0</span> kg (base 0.5kg/m²)</p>
+                    <p>Plinthes : ~<span id="res-plinthes" class="font-bold">0</span> (base pièce carrée, plinthes 2.4m)</p>
+                </div>
+            </div>
+
+            <!-- Peinture -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-100">
+                <h2 class="font-bold text-castoblue mb-4"><i class="fa-solid fa-paint-roller mr-2"></i>3. Peinture (2 couches)</h2>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-500">Surface totale à peindre (m²)</label>
+                    <input type="number" id="calc-surf-peint" class="w-full border rounded p-2 mt-1" oninput="calculerPeinture()">
+                </div>
+                <div class="mb-3">
+                    <label class="text-xs text-gray-500">Rendement de la peinture (m²/L)</label>
+                    <input type="number" id="calc-rendement" class="w-full border rounded p-2 mt-1" value="10" oninput="calculerPeinture()">
+                </div>
+                <div class="bg-yellow-50 p-4 rounded border border-yellow-100 text-sm space-y-2 text-gray-700">
+                    <p class="font-bold text-castoblue border-b pb-1">Besoins pour 2 couches :</p>
+                    <p>Quantité totale : <span id="res-litres" class="font-bold text-lg text-castoblue">0</span> Litres</p>
+                    <p class="text-xs text-gray-500 italic mt-2 border-t pt-2">Ventes complémentaires recommandées :</p>
+                    <p>Rouleaux adhésif masquage : <span id="res-adhesif" class="font-bold">0</span> rouleaux</p>
+                    <p>Bâches de protection : <span id="res-bache" class="font-bold">0</span> bâche(s)</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SCRIPTS JAVASCRIPT -->
+    <script>
+        // === GESTION DES ONGLETS ===
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + tab).classList.add('active');
+            
+            document.getElementById('tab-chat').className = 'flex-1 py-3 font-bold text-gray-500 border-b-4 border-transparent hover:text-castoblue transition-colors';
+            document.getElementById('tab-calc').className = 'flex-1 py-3 font-bold text-gray-500 border-b-4 border-transparent hover:text-castoblue transition-colors';
+            
+            if(tab === 'chat') {
+                document.getElementById('tab-chat').className = 'flex-1 py-3 font-bold text-castoblue border-b-4 border-castoyellow transition-colors';
+            } else {
+                document.getElementById('tab-calc').className = 'flex-1 py-3 font-bold text-castoblue border-b-4 border-castoyellow transition-colors';
+            }
+        }
+
+        // === CALCULATRICES ===
+        function calculerSurface() {
+            let L = parseFloat(document.getElementById('calc-long').value) || 0;
+            let l = parseFloat(document.getElementById('calc-larg').value) || 0;
+            let res = L * l;
+            document.getElementById('resultat-surface').innerText = res.toFixed(2);
+            document.getElementById('calc-surf-carr').value = res.toFixed(2);
+            document.getElementById('calc-surf-peint').value = res.toFixed(2);
+            calculerCarrelage();
+            calculerPeinture();
+        }
+
+        function calculerCarrelage() {
+            let surf = parseFloat(document.getElementById('calc-surf-carr').value) || 0;
+            let carton = parseFloat(document.getElementById('calc-carton').value) || 1;
+            
+            let surfTotale = surf * 1.10; // +10% de marge pour les coupes
+            let nbCartons = Math.ceil(surfTotale / carton);
+            
+            // Calculs ventes complémentaires
+            let colle = surfTotale * 5; // 5kg par m2
+            let joint = surfTotale * 0.5; // 0.5kg par m2
+            let perimetreEstime = Math.sqrt(surf) * 4; // Estimation grossière pour une pièce carrée
+            let plinthes = Math.ceil(perimetreEstime / 2.4);
+
+            document.getElementById('res-surf-totale').innerText = surfTotale.toFixed(2);
+            document.getElementById('res-cartons').innerText = nbCartons;
+            document.getElementById('res-colle').innerText = colle.toFixed(1);
+            document.getElementById('res-joint').innerText = joint.toFixed(1);
+            document.getElementById('res-plinthes').innerText = surf > 0 ? plinthes : 0;
+        }
+
+        function calculerPeinture() {
+            let surf = parseFloat(document.getElementById('calc-surf-peint').value) || 0;
+            let rend = parseFloat(document.getElementById('calc-rendement').value) || 10;
+            
+            let surfaceApeindre = surf * 2; // 2 couches obligatoires
+            let litres = surfaceApeindre / rend;
+            
+            // Calculs ventes complémentaires
+            let adhesif = Math.ceil(surf / 15); // Environ 1 rouleau pour 15m2 au sol
+            let bache = Math.ceil(surf / 20); // 1 bâche couvre environ 20m2
+
+            document.getElementById('res-litres').innerText = litres.toFixed(2);
+            document.getElementById('res-adhesif').innerText = surf > 0 ? adhesif : 0;
+            document.getElementById('res-bache').innerText = surf > 0 ? bache : 0;
+        }
+
+        // === BASE DE DONNEES PRODUITS INTEGREE (Pour éviter les erreurs CORS) ===
+        const catalogueData = {
+            "version": "1.0",
+            "magasin": "Castorama Quimper",
+            "consignes_generales": "Ne jamais recommander de mélanger des solvants entre eux. Vérifier l'état du support avant application.",
+            "produits": [
+                {
+                    "categorie": "Peinture",
+                    "sous_categorie": "Mur et Plafond",
+                    "marque": "GoodHome",
+                    "nom": "Peinture Murs et Plafonds Premium",
+                    "caracteristiques": "Monocouche, lessivable",
+                    "danger": "Aucun danger spécifique, aérer la pièce",
+                    "lien_recherche": "https://www.castorama.fr/search?Ntt=peinture+goodhome+mur+plafond+premium"
+                },
+                {
+                    "categorie": "Sous-couche",
+                    "sous_categorie": "Sol",
+                    "marque": "Diall",
+                    "nom": "Sous-couche fibre de bois",
+                    "caracteristiques": "Isolant phonique et thermique, épaisseur 5mm",
+                    "incompatibilite": "Ne pas utiliser dans les pièces humides (salle de bain)",
+                    "lien_recherche": "https://www.castorama.fr/search?Ntt=sous+couche+fibre+de+bois+diall"
+                },
+                {
+                    "categorie": "Préparation",
+                    "sous_categorie": "Traitement",
+                    "marque": "Rubson",
+                    "nom": "Traitement murs humides Murs Sains",
+                    "caracteristiques": "Bloque l'humidité, micro-poreux",
+                    "danger": "DANGER : Produit irritant, porter des gants et des lunettes de protection obligatoirement. Ne pas mélanger avec de l'eau de javel.",
+                    "lien_recherche": "https://www.castorama.fr/search?Ntt=rubson+murs+sains"
+                }
+            ]
+        };
+
+        // === CHATBOT IA GEMINI ===
+        
+        // Le prompt ultra strict
+        const systemInstruction = `Tu es un expert de vente au magasin Castorama de Quimper, spécialisé dans les rayons sol, peinture et déco.
+Ta mission est de conseiller de manière PUREMENT FACTUELLE ET LOGIQUE. L'imagination et la créativité te sont STRICTEMENT INTERDITES.
+Voici ton catalogue de référence exclusif : ${JSON.stringify(catalogueData)}.
+Règles impératives :
+1. Tu ne dois utiliser QUE les produits mentionnés dans le catalogue ci-dessus. Si le produit n'est pas dans le catalogue, donne une recommandation générique.
+2. Si une incompatibilité ou un danger est mentionné dans le catalogue, tu DOIS commencer ta réponse par le mot "DANGER :" ou "ATTENTION :".
+3. Si le client ou la situation demande quelque chose dont tu n'es pas absolument sûr, ou un mélange de produits chimiques, tu as l'interdiction d'inventer. Tu dois EXACTEMENT répondre cette phrase : "Je ne suis pas certain, vérifiez la compatibilité sur l'emballage du produit."
+4. Ajoute toujours un lien vers le site sous la forme [Nom du produit](URL_fournie_dans_le_catalogue).
+5. Suggère 2 ventes complémentaires logiques.`;
+
+        // Formatage du texte pour l'affichage des alertes
+        function formatMessage(text) {
+            let formatted = text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-castoblue underline font-bold">$1 <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Mise en valeur des consignes de sécurité
+            if (formatted.includes("DANGER :") || formatted.includes("DANGER:")) {
+                formatted = `<div class="danger-tag"><i class="fa-solid fa-triangle-exclamation"></i> ALERTE SÉCURITÉ :<br>${formatted}</div>`;
+            } else if (formatted.includes("ATTENTION :") || formatted.includes("ATTENTION:")) {
+                formatted = `<div class="warning-tag"><i class="fa-solid fa-circle-exclamation"></i> PRÉCAUTION :<br>${formatted}</div>`;
+            }
+            
+            // Mise en valeur de la phrase d'incompétence forcée
+            if (formatted.includes("Je ne suis pas certain, vérifiez la compatibilité sur l'emballage du produit.")) {
+                formatted = `<div class="warning-tag"><i class="fa-solid fa-shield-halved"></i> LIMITE DE CONSEIL :<br>${formatted}</div>`;
+            }
+
+            return formatted;
+        }
+
+        function appendMessage(sender, text) {
+            const history = document.getElementById('chat-history');
+            const div = document.createElement('div');
+            div.className = "flex gap-3 " + (sender === 'user' ? "flex-row-reverse" : "");
+            
+            let icon = sender === 'user' ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-solid fa-robot"></i>';
+            let bgIcon = sender === 'user' ? 'bg-gray-300' : 'bg-castoblue';
+            let txtColor = sender === 'user' ? 'text-gray-700' : 'text-white';
+            let msgBg = sender === 'user' ? 'bg-castoyellow' : 'bg-white border shadow-sm';
+            
+            div.innerHTML = `
+                <div class="${bgIcon} ${txtColor} p-2 rounded-full h-10 w-10 flex items-center justify-center shrink-0">
+                    ${icon}
+                </div>
+                <div class="${msgBg} rounded-lg p-3 max-w-[85%] text-sm text-gray-800">
+                    ${sender === 'bot' ? formatMessage(text) : text}
+                </div>
+            `;
+            history.appendChild(div);
+            history.scrollTop = history.scrollHeight;
+        }
+
+        function sendQuickPrompt(promptText) {
+            document.getElementById('chat-input').value = promptText;
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            const apiKey = document.getElementById('apiKeyInput').value.trim();
+            
+            if (!message) return;
+            if (!apiKey) {
+                alert("Veuillez entrer votre clé API Gemini en haut à droite.");
+                return;
+            }
+
+            appendMessage('user', message);
+            input.value = '';
+            
+            // Affiche un indicateur de chargement
+            const loadingId = 'loading-' + Date.now();
+            const history = document.getElementById('chat-history');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.id = loadingId;
+            loadingDiv.className = "flex gap-3";
+            loadingDiv.innerHTML = `
+                <div class="bg-castoblue text-white p-2 rounded-full h-10 w-10 flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-robot fa-spin"></i>
+                </div>
+                <div class="bg-white border shadow-sm rounded-lg p-3 text-sm text-gray-500 italic">
+                    Analyse des données magasin en cours...
+                </div>
+            `;
+            history.appendChild(loadingDiv);
+            history.scrollTop = history.scrollHeight;
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: message }] }],
+                        systemInstruction: { parts: [{ text: systemInstruction }] },
+                        generationConfig: {
+                            temperature: 0.0, // LA BRIDE : Aucune imagination, réponses factuelles et mécaniques.
+                            maxOutputTokens: 500
+                        }
+                    })
+                });
+
+                const data = await response.json();
+                document.getElementById(loadingId).remove();
+
+                if (data.error) {
+                    appendMessage('bot', "Erreur API : " + data.error.message);
+                } else {
+                    const botReply = data.candidates[0].content.parts[0].text;
+                    appendMessage('bot', botReply);
+                }
+            } catch (error) {
+                document.getElementById(loadingId).remove();
+                appendMessage('bot', "DANGER : Erreur de connexion au système. " + error.message);
+            }
+        }
+
+        // Permet d'envoyer le message avec la touche "Entrée"
+        document.getElementById('chat-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
