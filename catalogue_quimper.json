@@ -1,0 +1,93 @@
+{
+"version": "2.0",
+"magasin": "Castorama Quimper",
+"consignes_generales": "Ne jamais recommander de mélanger des solvants entre eux. Vérifier l'état du support (humidité, planéité) avant toute pose de sol. Ne pas inventer de normes de sécurité.",
+"produits": [
+{
+"categorie": "Mise en oeuvre",
+"sous_categorie": "Ragréage",
+"marque": "Bostik",
+"nom": "Ragréage autolissant fibré extérieur/intérieur",
+"caracteristiques": "Épaisseur 3 à 30 mm, circulable après 3h, pose de carrelage après 12h.",
+"danger": "ATTENTION : Contient du ciment (irritant). Port de gants et lunettes obligatoire. Ne pas respirer les poussières lors du malaxage.",
+"incompatibilite": "Ne jamais appliquer sur un sol bois ancien sans primaire spécifique et préparation adéquate.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=ragreage+fibre+bostik"
+},
+{
+"categorie": "Mise en oeuvre",
+"sous_categorie": "Préparation",
+"marque": "Parexlanko",
+"nom": "Primaire tous supports Parexlanko",
+"caracteristiques": "Régule la porosité du support, améliore l'adhérence avant ragréage ou collage.",
+"danger": "Faible. Bien aérer la pièce.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=primaire+tous+supports+parexlanko"
+},
+{
+"categorie": "Mise en oeuvre",
+"sous_categorie": "Colle",
+"marque": "Parexlanko",
+"nom": "Colle tous carreaux, tous supports Parexlanko gris 25kg",
+"caracteristiques": "Mortier colle déformable (C2S1), idéal pour plancher chauffant et grands formats.",
+"danger": "ATTENTION : Produit cimentaire. Provoque de graves lésions des yeux et des irritations cutanées.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=colle+parexlanko+25kg"
+},
+{
+"categorie": "Revêtement de sol",
+"sous_categorie": "Carrelage",
+"marque": "GoodHome",
+"nom": "Carrelage sol intérieur effet bois",
+"caracteristiques": "Grès cérame émaillé, passage intensif, format lame 20x120 cm.",
+"danger": "Poussière de silice lors de la coupe. Masque FFP2 obligatoire pour les coupes à la meuleuse.",
+"incompatibilite": "Pose décalée maximum d'1/3 de la lame recommandée pour éviter les désaffleurements.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=carrelage+sol+effet+bois+goodhome"
+},
+{
+"categorie": "Revêtement de sol",
+"sous_categorie": "Sol PVC",
+"marque": "GoodHome",
+"nom": "Lame PVC clipsable rigide (SPC)",
+"caracteristiques": "100% étanche, compatible pièces humides, sous-couche intégrée selon les modèles.",
+"danger": "Aucun danger à la pose. Découpe facile au cutter.",
+"incompatibilite": "Ne pas poser derrière une baie vitrée très exposée au soleil sans vérifier la tolérance thermique (risque de dilatation).",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=lame+pvc+clipsable+rigide"
+},
+{
+"categorie": "Revêtement de sol",
+"sous_categorie": "Sol PVC",
+"marque": "Diall",
+"nom": "Dalle PVC adhésive",
+"caracteristiques": "Pose rapide sur sol parfaitement lisse et propre. Épaisseur 2mm.",
+"incompatibilite": "Ne pas poser directement sur un ancien carrelage avec des joints creux (les joints finiront par transparaître). Ragréage obligatoire.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=dalle+pvc+adhesive"
+},
+{
+"categorie": "Revêtement de sol",
+"sous_categorie": "Stratifié",
+"marque": "GoodHome",
+"nom": "Sol stratifié résistant à l'eau",
+"caracteristiques": "Compatible salle de bain, traitement hydrofuge en surface, épaisseur 8mm.",
+"danger": "Attention aux coupes de stratifié (poussière de bois).",
+"incompatibilite": "L'eau stagnante doit être essuyée rapidement, ce n'est pas du PVC.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=stratifie+resistant+eau"
+},
+{
+"categorie": "Mise en oeuvre",
+"sous_categorie": "Sous-couche",
+"marque": "Diall",
+"nom": "Sous-couche isolation acoustique pour parquet/stratifié",
+"caracteristiques": "Réduction des bruits d'impact, pare-vapeur intégré (indispensable sur dalle béton).",
+"danger": "Nul.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=sous+couche+acoustique+pare+vapeur"
+},
+{
+"categorie": "Mise en oeuvre",
+"sous_categorie": "Joints",
+"marque": "Parexlanko",
+"nom": "Joint fin pour carrelage sol et mur 2,5 kg",
+"caracteristiques": "Finition lisse, hydrofugé, pour joints de 1 à 6 mm.",
+"danger": "ATTENTION : Corrosif pour les yeux et la peau avant séchage.",
+"incompatibilite": "Ne convient pas pour des joints très larges ou pour des piscines sans additif.",
+"lien_recherche": "https://www.castorama.fr/search?Ntt=joint+fin+carrelage"
+}
+]
+}
