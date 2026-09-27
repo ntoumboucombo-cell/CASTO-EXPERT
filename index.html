@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CASTO-EXPERT | Quimper</title>
+    <title>CASTO-EXPERT | Quimper (Hors-Ligne)</title>
     
     <!-- Polices et Icônes -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
                     colors: {
                         castoblue: '#004C97',
                         castoyellow: '#FFD100',
-                        prisme: '#1a1a1a' // Teinte sombre élégante inspirée des agences
+                        prisme: '#1a1a1a'
                     },
                     boxShadow: {
                         'soft': '0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
@@ -34,7 +34,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <style>
-        body { font-family: 'Open Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Open Sans', sans-serif; background-color: #f8fafc; margin: 0; }
         .tab-content { display: none; }
         .tab-content.active { display: flex; }
         .danger-tag { background-color: #fee2e2; border-left: 4px solid #ef4444; padding: 12px; margin: 12px 0; border-radius: 0 8px 8px 0; font-weight: 600; color: #b91c1c; }
@@ -58,7 +58,7 @@
 <body class="flex flex-col h-screen overflow-hidden text-gray-800">
 
     <!-- EN-TÊTE PREMIUM -->
-    <header class="bg-white shadow-sm z-20 relative px-6 py-4 flex justify-between items-center shrink-0">
+    <header class="bg-white shadow-sm z-20 relative px-6 py-4 flex flex-wrap gap-4 justify-between items-center shrink-0">
         <div class="flex items-center gap-4">
             <!-- Logo Castorama stylisé -->
             <div class="bg-castoblue text-white font-extrabold italic px-4 py-1 text-2xl tracking-tighter rounded-sm">
@@ -72,14 +72,14 @@
         </div>
         
         <!-- Navigation intégrée en pilule -->
-        <nav class="flex bg-gray-100 p-1 rounded-full shadow-inner">
-            <button id="tab-btn-chat" class="px-6 py-2 rounded-full font-bold text-sm transition-all text-castoblue bg-white shadow-sm" onclick="switchTab('chat')">
+        <nav class="flex bg-gray-100 p-1 rounded-full shadow-inner overflow-x-auto w-full md:w-auto">
+            <button id="tab-btn-chat" class="px-6 py-2 rounded-full font-bold text-sm transition-all text-castoblue bg-white shadow-sm whitespace-nowrap" onclick="switchTab('chat')">
                 <i class="fa-solid fa-robot mr-2"></i> IA Conseil
             </button>
-            <button id="tab-btn-calc" class="px-6 py-2 rounded-full font-bold text-sm text-gray-500 hover:text-gray-700 transition-all" onclick="switchTab('calc')">
+            <button id="tab-btn-calc" class="px-6 py-2 rounded-full font-bold text-sm text-gray-500 hover:text-gray-700 transition-all whitespace-nowrap" onclick="switchTab('calc')">
                 <i class="fa-solid fa-calculator mr-2"></i> Chiffrage
             </button>
-            <button id="tab-btn-3d" class="px-6 py-2 rounded-full font-bold text-sm text-gray-500 hover:text-gray-700 transition-all" onclick="switchTab('3d')">
+            <button id="tab-btn-3d" class="px-6 py-2 rounded-full font-bold text-sm text-gray-500 hover:text-gray-700 transition-all whitespace-nowrap" onclick="switchTab('3d')">
                 <i class="fa-solid fa-cube mr-2"></i> Studio 3D
             </button>
         </nav>
@@ -93,7 +93,7 @@
                     <i class="fa-solid fa-bolt text-castoyellow text-xl"></i>
                 </div>
                 <div class="bg-white border border-gray-100 shadow-soft rounded-2xl rounded-tl-none p-4 max-w-[85%]">
-                    <p class="text-sm leading-relaxed text-gray-700">Bonjour. Je suis l'assistant expert paramétré pour le magasin de Quimper. Quel est le projet du client ?</p>
+                    <p class="text-sm leading-relaxed text-gray-700">Bonjour. Je suis l'assistant expert paramétré pour le magasin de Quimper. Base de données locale chargée, mode hors-ligne activé. L'éloquence et la précision sont mes maîtres-mots pour accompagner ta vente. Quel est le projet du client ?</p>
                 </div>
             </div>
         </div>
@@ -128,11 +128,11 @@
                 <div class="space-y-4">
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wide">Longueur (m)</label>
-                        <input type="number" id="calc-long" class="w-full bg-gray-50 border-none rounded-lg p-3 mt-1 focus:ring-2 focus:ring-castoyellow" oninput="calculerToutesSurfaces()">
+                        <input type="number" id="calc-long" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 mt-1 focus:ring-2 focus:ring-castoyellow" oninput="calculerToutesSurfaces()">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wide">Largeur (m)</label>
-                        <input type="number" id="calc-larg" class="w-full bg-gray-50 border-none rounded-lg p-3 mt-1 focus:ring-2 focus:ring-castoyellow" oninput="calculerToutesSurfaces()">
+                        <input type="number" id="calc-larg" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 mt-1 focus:ring-2 focus:ring-castoyellow" oninput="calculerToutesSurfaces()">
                     </div>
                 </div>
                 <div class="mt-6 bg-castoblue p-4 rounded-xl text-center text-white shadow-md">
@@ -150,11 +150,11 @@
                 <div class="space-y-4 mb-6">
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wide">Surface (m²)</label>
-                        <input type="number" id="calc-surf-carr" class="w-full bg-gray-50 border-none rounded-lg p-3 mt-1" oninput="calculerCarrelage()">
+                        <input type="number" id="calc-surf-carr" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 mt-1" oninput="calculerCarrelage()">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wide">Contenu d'un paquet (m²)</label>
-                        <input type="number" id="calc-carton" class="w-full bg-gray-50 border-none rounded-lg p-3 mt-1" value="1.5" step="0.1" oninput="calculerCarrelage()">
+                        <input type="number" id="calc-carton" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 mt-1" value="1.5" step="0.1" oninput="calculerCarrelage()">
                     </div>
                 </div>
                 <div class="bg-gray-50 rounded-xl p-5 border border-gray-100">
@@ -179,11 +179,11 @@
                 <div class="space-y-4 mb-6">
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wide">Surface à peindre (m²)</label>
-                        <input type="number" id="calc-surf-peint" class="w-full bg-gray-50 border-none rounded-lg p-3 mt-1" oninput="calculerPeinture()">
+                        <input type="number" id="calc-surf-peint" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 mt-1" oninput="calculerPeinture()">
                     </div>
                     <div>
                         <label class="text-xs font-bold text-gray-500 uppercase tracking-wide">Rendement (m²/L)</label>
-                        <input type="number" id="calc-rendement" class="w-full bg-gray-50 border-none rounded-lg p-3 mt-1" value="10" oninput="calculerPeinture()">
+                        <input type="number" id="calc-rendement" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-3 mt-1" value="10" oninput="calculerPeinture()">
                     </div>
                 </div>
                 <div class="bg-yellow-50 rounded-xl p-5 border border-yellow-100">
@@ -200,11 +200,11 @@
         </div>
     </main>
 
-    <!-- ONGLET : STUDIO 3D (Refonte Complète) -->
-    <main id="tab-3d" class="tab-content flex-1 h-full bg-white flex-row">
+    <!-- ONGLET : STUDIO 3D -->
+    <main id="tab-3d" class="tab-content flex-1 h-full bg-white flex-col md:flex-row">
         
-        <!-- Panneau de contrôle gauche (Style Logiciel d'Architecture) -->
-        <aside class="w-80 bg-gray-50 border-r border-gray-200 p-5 overflow-y-auto flex flex-col gap-6 shadow-xl z-10 relative">
+        <!-- Panneau de contrôle gauche -->
+        <aside class="w-full md:w-80 bg-gray-50 border-r border-gray-200 p-5 overflow-y-auto flex flex-col gap-6 shadow-xl z-10 relative shrink-0">
             <div>
                 <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-3">Configuration Pièce</h3>
                 <select id="room-type" class="w-full bg-white border border-gray-200 rounded-lg p-2 text-sm font-semibold text-gray-700 shadow-sm focus:ring-2 focus:ring-castoblue" onchange="init3D()">
@@ -258,13 +258,14 @@
         <div class="flex-1 p-6 relative">
             <div id="canvas-container"></div>
             <!-- Surcouche pour guider l'utilisateur -->
-            <div class="absolute bottom-10 right-10 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-lg text-xs font-semibold text-gray-500 pointer-events-none">
+            <div class="absolute bottom-10 right-10 bg-white/90 backdrop-blur px-4 py-2 rounded-lg shadow-lg text-xs font-semibold text-gray-500 pointer-events-none hidden md:block">
                 <i class="fa-solid fa-hand-pointer mr-1"></i> Clic gauche : Tourner | Défilement : Zoomer
             </div>
         </div>
     </main>
 
-
+    <!-- SCRIPTS -->
+    <script>
         // === GESTION DE L'INTERFACE ET DES ONGLETS ===
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -272,13 +273,18 @@
             
             ['chat', 'calc', '3d'].forEach(id => {
                 let btn = document.getElementById('tab-btn-' + id);
-                btn.className = 'px-6 py-2 rounded-full font-bold text-sm text-gray-500 hover:text-gray-700 transition-all';
+                btn.className = 'px-6 py-2 rounded-full font-bold text-sm text-gray-500 hover:text-gray-700 transition-all whitespace-nowrap';
             });
             
-            document.getElementById('tab-btn-' + tabId).className = 'px-6 py-2 rounded-full font-bold text-sm transition-all text-castoblue bg-white shadow-sm';
+            document.getElementById('tab-btn-' + tabId).className = 'px-6 py-2 rounded-full font-bold text-sm transition-all text-castoblue bg-white shadow-sm whitespace-nowrap';
             
-            if (tabId === '3d' && !scene) {
-                setTimeout(init3D, 100); // Initialise la 3D quand l'onglet devient visible
+            if (tabId === '3d') {
+                if(!scene) {
+                    setTimeout(init3D, 100);
+                } else {
+                    // Force resize trigger when returning to tab to fix canvas scaling issues
+                    setTimeout(() => window.dispatchEvent(new Event('resize')), 10);
+                }
             }
         }
 
@@ -312,27 +318,30 @@
             document.getElementById('res-bache').innerText = Math.ceil(surf / 20);
         }
 
-        // === BASE DE DONNÉES EXPERT QUIMPER ===
-        const catalogueData = {
-            "magasin": "Quimper",
-            "consignes": "Argumente comme un juriste ou un avocat plaidant pour justifier la qualité d'un produit. Ne donne que des faits, aucune imagination technique.",
-            "produits": [
-                {"categorie": "Peinture", "nom": "GoodHome Murs & Plafonds Premium", "atout": "Gain de temps (monocouche), lessivable."},
-                {"categorie": "Étanchéité", "nom": "SPEC Parexlanko", "danger": "OBLIGATOIRE dans les douches à l'italienne avant carrelage."},
-                {"categorie": "Sol", "nom": "Ragréage autolissant Bostik", "danger": "Respecter scrupuleusement le litrage d'eau indiqué sur le sac."}
-            ]
-        };
+        // === MOTEUR DE RÉPONSES LOCAL (SANS CLÉ API) ===
+        function generateLocalResponse(message) {
+            const msg = message.toLowerCase();
+            
+            if(msg.includes("premium") || msg.includes("vendre") || msg.includes("monocouche") || msg.includes("prix")) {
+                return "Pour justifier la montée en gamme vers la **GoodHome Murs & Plafonds Premium**, voici ton argumentaire :\n\n1. **Gain de temps massif** : C'est une vraie monocouche, le client s'évite une demi-journée de travail.\n2. **Durabilité** : Finition lessivable, idéale pour les passages fréquents.\nLe surcoût à l'achat est largement rentabilisé par l'économie d'un second pot et de matériel.";
+            }
+            if(msg.includes("chauffant") || msg.includes("dtu") || msg.includes("carrelage")) {
+                return "ATTENTION : Selon le DTU pour un plancher chauffant, il est OBLIGATOIRE d'utiliser une **Colle Flex (C2S1 ou C2S2)** type Bostik. \nNe jamais utiliser de colle standard au risque de voir le carrelage fissurer avec la dilatation thermique. \nLaisse aussi un joint périphérique de 5mm minimum avec des cales.";
+            }
+            if(msg.includes("spec") || msg.includes("eau") || msg.includes("douche")) {
+                return "DANGER : Pour une salle d'eau (notamment douche à l'italienne), l'application d'un **SPEC (Système de Protection à l'Eau Sous Carrelage)** type Parexlanko est OBLIGATOIRE sur les murs avant la pose de la faïence.\n\nLe carrelage et les joints ne sont pas 100% étanches. Sans SPEC, l'eau s'infiltrera dans le support (placo).";
+            }
+            if(msg.includes("ragréage") || msg.includes("ragreage") || msg.includes("sol")) {
+                return "DANGER : Pour le **Ragréage autolissant**, rappelle bien au client de respecter SCRUPULEUSEMENT le litrage d'eau indiqué sur le sac. \nUn excès d'eau pour faciliter l'étalement va 'noyer' le produit, créer une laitance en surface et réduire drastiquement sa résistance mécanique.";
+            }
+            
+            return "Je suis en mode hors-ligne. Voici ce que je trouve dans le catalogue local pour votre demande. \nAssurez-vous de vérifier la compatibilité des supports. \n\n*(Astuce : Parlez-moi de : peinture premium, plancher chauffant, SPEC salle d'eau, ou ragréage pour voir les argumentaires pré-enregistrés).*";
+        }
 
-        const sysPrompt = `Tu es Casto-Expert, l'assistant IA du conseiller de vente du rayon sol/peinture/déco à Castorama Quimper. 
-L'utilisateur est le conseiller, ton but est de l'aider à construire un argumentaire béton pour vendre et conseiller les clients. 
-Utilise un ton structuré, éloquent, et professionnel (comme une plaidoirie commerciale convaincante). 
-NE JAMAIS INVENTER DE NORMES DE SÉCURITÉ. Si doute : "Je ne suis pas certain, vérifions la fiche technique."
-Base : ${JSON.stringify(catalogueData)}`;
-
-        // === GESTION DU CHATBOT ===
+        // === GESTION DU CHATBOT VISUEL ===
         function formatMessage(text) {
             let formatted = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            if (formatted.includes("DANGER") || formatted.includes("OBLIGATOIRE")) {
+            if (formatted.includes("DANGER") || formatted.includes("OBLIGATOIRE") || formatted.includes("ATTENTION")) {
                 formatted = `<div class="danger-tag"><i class="fa-solid fa-triangle-exclamation"></i> Point Technique Crucial :<br>${formatted}</div>`;
             }
             return formatted;
@@ -364,52 +373,40 @@ Base : ${JSON.stringify(catalogueData)}`;
             sendMessage();
         }
 
-        async function sendMessage() {
+        function sendMessage() {
             const input = document.getElementById('chat-input');
             const message = input.value.trim();
             if (!message) return;
             
-            if (GEMINI_API_KEY === "TON_CODE_API_ICI" || GEMINI_API_KEY === "") {
-                appendMessage('bot', "DANGER : Clé API non configurée. Veuiller éditer le fichier HTML à la ligne 306 pour y coller votre clé Gemini.");
-                return;
-            }
-
             appendMessage('user', message);
             input.value = '';
 
             const loadingId = 'loading-' + Date.now();
             const history = document.getElementById('chat-history');
-            history.insertAdjacentHTML('beforeend', `<div id="${loadingId}" class="flex gap-4"><div class="bg-castoblue shadow-md rounded-xl h-12 w-12 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt fa-spin text-castoyellow"></i></div><div class="bg-white border shadow-soft rounded-2xl p-4 text-sm text-gray-500 italic">Construction de l'argumentaire...</div></div>`);
+            history.insertAdjacentHTML('beforeend', `<div id="${loadingId}" class="flex gap-4"><div class="bg-castoblue shadow-md rounded-xl h-12 w-12 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt fa-spin text-castoyellow"></i></div><div class="bg-white border shadow-soft rounded-2xl p-4 text-sm text-gray-500 italic">Analyse par le moteur local...</div></div>`);
             history.scrollTop = history.scrollHeight;
 
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: message }] }],
-                        systemInstruction: { parts: [{ text: sysPrompt }] },
-                        generationConfig: { temperature: 0.1 } // Bridé pour rester factuel
-                    })
-                });
-                const data = await response.json();
+            // Simule un délai de réflexion
+            setTimeout(() => {
                 document.getElementById(loadingId).remove();
-                if (data.error) appendMessage('bot', "Erreur : " + data.error.message);
-                else appendMessage('bot', data.candidates[0].content.parts[0].text);
-            } catch (err) {
-                document.getElementById(loadingId).remove();
-                appendMessage('bot', "Erreur réseau.");
-            }
+                const botReply = generateLocalResponse(message);
+                appendMessage('bot', botReply);
+            }, 600);
         }
+
+        document.getElementById('chat-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
         // === MOTEUR 3D (THREE.JS) ===
         let scene, camera, renderer, controls, lightAmbient, lightDir;
-        let layers = {}; // Stocke les meshes par nom de couche
+        let layers = {};
 
         function init3D() {
             const container = document.getElementById('canvas-container');
             if(scene) {
-                // Nettoyage si on change de type de pièce
                 while(scene.children.length > 0){ scene.remove(scene.children[0]); }
             } else {
                 scene = new THREE.Scene();
@@ -426,12 +423,15 @@ Base : ${JSON.stringify(catalogueData)}`;
                 
                 controls = new THREE.OrbitControls(camera, renderer.domElement);
                 controls.target.set(0, 1, 0);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
                 
-                // Redimensionnement auto
                 window.addEventListener('resize', () => {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
+                    if (container.clientWidth > 0 && container.clientHeight > 0) {
+                        camera.aspect = container.clientWidth / container.clientHeight;
+                        camera.updateProjectionMatrix();
+                        renderer.setSize(container.clientWidth, container.clientHeight);
+                    }
                 });
                 
                 animate();
@@ -441,7 +441,6 @@ Base : ${JSON.stringify(catalogueData)}`;
         }
 
         function createLayerMaterial(colorHex, isWireframe = false, textureUrl = null) {
-            // Création procédurale de textures basiques pour simuler le carrelage/bois
             if(textureUrl === 'grid') {
                 const size = 512;
                 const canvas = document.createElement('canvas');
@@ -469,9 +468,8 @@ Base : ${JSON.stringify(catalogueData)}`;
         function buildRoom() {
             const l = parseFloat(document.getElementById('dim-l').value) || 5;
             const w = parseFloat(document.getElementById('dim-w').value) || 4;
-            const h = 2.5; // Hauteur mur standard
+            const h = 2.5; 
             
-            // Lumières
             lightAmbient = new THREE.AmbientLight(0xffffff, 0.6);
             scene.add(lightAmbient);
             lightDir = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -479,29 +477,24 @@ Base : ${JSON.stringify(catalogueData)}`;
             lightDir.castShadow = true;
             scene.add(lightDir);
 
-            // ==================
-            // STRATES DU SOL
-            // ==================
+            // Strates Sol
             const floorGeo = new THREE.PlaneGeometry(l, w);
             floorGeo.rotateX(-Math.PI / 2);
             
-            layers['sol-chape'] = new THREE.Mesh(floorGeo, createLayerMaterial(0x9ca3af)); // Gris béton
+            layers['sol-chape'] = new THREE.Mesh(floorGeo, createLayerMaterial(0x9ca3af));
             layers['sol-chape'].receiveShadow = true;
             
-            layers['sol-souscouche'] = new THREE.Mesh(floorGeo, createLayerMaterial(0x4ade80)); // Vert fibre
+            layers['sol-souscouche'] = new THREE.Mesh(floorGeo, createLayerMaterial(0x4ade80));
             layers['sol-souscouche'].position.y = 0.01;
             
-            layers['sol-colle'] = new THREE.Mesh(floorGeo, createLayerMaterial(0xd1d5db, true)); // Stries grises
+            layers['sol-colle'] = new THREE.Mesh(floorGeo, createLayerMaterial(0xd1d5db, true));
             layers['sol-colle'].position.y = 0.02;
             
-            // Revêtement (Motif quadrillé style carrelage)
             layers['sol-revetement'] = new THREE.Mesh(floorGeo, createLayerMaterial('#c2b280', false, 'grid'));
             layers['sol-revetement'].position.y = 0.03;
             layers['sol-revetement'].receiveShadow = true;
 
-            // ==================
-            // STRATES DES MURS (On fait 2 murs pour l'angle)
-            // ==================
+            // Strates Mur
             const wall1Geo = new THREE.PlaneGeometry(l, h);
             const wall2Geo = new THREE.PlaneGeometry(w, h);
             
@@ -512,12 +505,11 @@ Base : ${JSON.stringify(catalogueData)}`;
             groupMur2.position.set(-l/2, h/2, 0);
             groupMur2.rotation.y = Math.PI / 2;
 
-            // Création des couches pour les murs
             ['mur-brut', 'mur-spec', 'mur-colle', 'mur-finition'].forEach((nom, index) => {
-                let color = 0xd1d5db; // Placo par defaut
-                if(nom==='mur-spec') color = 0x60a5fa; // Bleu SPEC
-                if(nom==='mur-colle') color = 0x9ca3af; // Gris colle
-                if(nom==='mur-finition') color = 0xfef08a; // Peinture jaune clair
+                let color = 0xd1d5db;
+                if(nom==='mur-spec') color = 0x60a5fa; 
+                if(nom==='mur-colle') color = 0x9ca3af; 
+                if(nom==='mur-finition') color = 0xfef08a; 
                 
                 let isWire = (nom==='mur-colle');
                 let offset = index * 0.01;
@@ -530,38 +522,41 @@ Base : ${JSON.stringify(catalogueData)}`;
                 m2.position.z = offset;
                 groupMur2.add(m2);
 
-                // Stockage global pour l'affichage via checkboxes
                 if(!layers[nom]) layers[nom] = [];
                 layers[nom].push(m1, m2);
             });
 
-            // ==================
-            // CALES DE DILATATION
-            // ==================
+            // Cales de dilatation
             const calesGroup = new THREE.Group();
             const caleGeo = new THREE.BoxGeometry(0.05, 0.02, 0.1);
-            const caleMat = new THREE.MeshStandardMaterial({color: 0xef4444}); // Rouge
-            // Placer quelques cales le long du mur 1
+            const caleMat = new THREE.MeshStandardMaterial({color: 0xef4444}); 
             for(let i= -l/2 + 0.2; i < l/2; i+=0.5){
                 let cale = new THREE.Mesh(caleGeo, caleMat);
                 cale.position.set(i, 0.04, -w/2 + 0.05);
                 calesGroup.add(cale);
+                
+                let cale2 = new THREE.Mesh(caleGeo, caleMat);
+                cale2.rotation.y = Math.PI / 2;
+                cale2.position.set(-l/2 + 0.05, 0.04, -w/2 + 0.2 + (i + l/2));
+                calesGroup.add(cale2);
             }
             layers['sol-cales'] = calesGroup;
 
-            // Ajout à la scène
             Object.keys(layers).forEach(key => {
                 let obj = layers[key];
                 if(Array.isArray(obj)){
-                    obj.forEach(o => scene.add(o.parent || o)); // On ajoute le parent (Group) si c'est un mur
+                    obj.forEach(o => scene.add(o.parent || o)); 
                 } else {
                     scene.add(obj);
                 }
             });
             
-            // Si Salle de bain, on force l'affichage du SPEC
+            // Templates de pièce
             if(document.getElementById('room-type').value === 'sdb'){
                 document.getElementById('layer-mur-spec').checked = true;
+            } else if (document.getElementById('room-type').value === 'terrasse') {
+                groupMur1.visible = false;
+                groupMur2.visible = false;
             }
 
             syncLayersVisibility();
@@ -597,7 +592,7 @@ Base : ${JSON.stringify(catalogueData)}`;
                 lightDir.intensity = 0.5;
             } else {
                 lightAmbient.color.setHex(0xffffff);
-                lightAmbient.intensity = 0.6;
+                             lightAmbient.intensity = 0.6;
                 lightDir.color.setHex(0xffffff);
                 lightDir.intensity = 0.8;
             }
@@ -605,8 +600,8 @@ Base : ${JSON.stringify(catalogueData)}`;
 
         function animate() {
             requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
+            if (controls) controls.update();
+            if (renderer && scene && camera) renderer.render(scene, camera);
         }
     </script>
 </body>
