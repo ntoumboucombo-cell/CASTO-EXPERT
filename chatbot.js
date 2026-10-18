@@ -3,10 +3,18 @@
 const GEMINI_API_KEY = "TON_CODE_API_ICI"; 
 // ==========================================
 
+// Le prompt système utilise directement catalogueData (chargé depuis data/catalogue.js)
 const sysPrompt = `Tu es Casto-Expert, l'assistant IA du conseiller de vente du rayon sol/peinture/déco à Castorama Quimper. 
 Ton but est d'aider le conseiller à construire un argumentaire de vente béton et factuel.
-RÈGLE ABSOLUE : Ne JAMAIS inventer de normes de sécurité. Si tu as un doute, réponds : "Je ne suis pas certain, vérifions la fiche technique."
-Mets en évidence les dangers (comme l'eau dans le ragréage, le SPEC en salle d'eau) avec le mot DANGER.`;
+
+Voici la base de données actuelle des produits en promotion (OP15 CASTOMANIA) :
+${JSON.stringify(catalogueData.produits)}
+
+RÈGLES ABSOLUES : 
+1. Ne JAMAIS inventer de normes de sécurité ni de produits.
+2. Si le client cherche un produit, cherche-le D'ABORD dans la base de données fournie ci-dessus et propose son prix exact.
+3. Argumente comme un avocat plaidant pour justifier la qualité d'un produit face au client.
+4. Mets en évidence les dangers ou les obligations techniques (DTU) avec le mot DANGER.`;
 
 function formatMessage(text) {
     let formatted = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
@@ -57,7 +65,7 @@ async function sendMessage() {
 
     const loadingId = 'loading-' + Date.now();
     const history = document.getElementById('chat-history');
-    history.insertAdjacentHTML('beforeend', `<div id="${loadingId}" class="flex gap-4"><div class="bg-castoblue shadow-md rounded-xl h-12 w-12 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt fa-spin text-castoyellow"></i></div><div class="bg-white border shadow-soft rounded-2xl p-4 text-sm text-gray-500 italic">Réflexion de l'IA...</div></div>`);
+    history.insertAdjacentHTML('beforeend', `<div id="${loadingId}" class="flex gap-4"><div class="bg-castoblue shadow-md rounded-xl h-12 w-12 flex items-center justify-center shrink-0"><i class="fa-solid fa-bolt fa-spin text-castoyellow"></i></div><div class="bg-white border shadow-soft rounded-2xl p-4 text-sm text-gray-500 italic">Analyse du catalogue en cours...</div></div>`);
     history.scrollTop = history.scrollHeight;
 
     try {
@@ -67,7 +75,7 @@ async function sendMessage() {
             body: JSON.stringify({
                 contents: [{ parts: [{ text: message }] }],
                 systemInstruction: { parts: [{ text: sysPrompt }] },
-                generationConfig: { temperature: 0.1 } // Très factuel, très peu d'imagination
+                generationConfig: { temperature: 0.2 } 
             })
         });
         const data = await response.json();
