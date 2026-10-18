@@ -1,6 +1,6 @@
 // ==========================================
 // METS TA CLÉ API GEMINI ICI ENTRE LES GUILLEMETS
-const GEMINI_API_KEY = "TON_CODE_API_ICI"; 
+const GEMINI_API_KEY = "AIzaSyDcPreV0TjHvjOeHyEg8hVd1kagNL5o8VI"; 
 // ==========================================
 
 // Le prompt système utilise directement catalogueData (chargé depuis data/catalogue.js)
