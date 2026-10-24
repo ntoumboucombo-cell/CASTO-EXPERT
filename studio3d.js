@@ -127,7 +127,7 @@ function buildRoom() {
     layers['sol-chape'] = new THREE.Mesh(floorGeo, new THREE.MeshStandardMaterial({color: 0x9ca3af, roughness: 1}));
     
     // 2. Sous-couche (ex: isolation thermique)
-    layers['sol-souscouche'] = new THREE.Mesh(floorGeo, new THREE.MeshStandardMaterial({color: 0x4ade80, roughness: 0.9}));
+    layers['sol-souscouche'] = new THREE.Mesh(floorGeo, new THREE.MeshStandardMaterial({color: 0x4ade80}));
     layers['sol-souscouche'].position.y = 0.01;
     
     // 3. Adhésif Aluminium (Ruban de masquage)
